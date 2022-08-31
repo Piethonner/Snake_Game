@@ -10,24 +10,30 @@ RIGHT = 0
 class Snake:
 
     def __init__(self):
-        self.snake = []
+        self.snake_body = []
         self.create_snake()
-        self.head = self.snake[0]
+        self.head = self.snake_body[0]
 
     def create_snake(self):
         for position in POSITIONS:
-            snake_body = Turtle(shape="square")
-            snake_body.penup()
-            snake_body.goto(position)
-            snake_body.color("white")
-            self.snake.append(snake_body)
+            self.additional_part(position)
+
+    def additional_part(self, position):
+        body_part = Turtle(shape="square")
+        body_part.penup()
+        body_part.goto(position)
+        body_part.color("white")
+        self.snake_body.append(body_part)
+
+    def extend(self):
+        self.additional_part(self.snake_body[-1].position())
 
     def move(self):
-        for bod in range(len(self.snake) - 1, 0, -1):
-            new_x = self.snake[bod - 1].xcor()
-            new_y = self.snake[bod - 1].ycor()
-            self.snake[bod].goto(new_x, new_y)
-        self.snake[0].forward(MOVE_DISTANCE)
+        for bod_num in range(len(self.snake_body) - 1, 0, -1):
+            new_x = self.snake_body[bod_num - 1].xcor()
+            new_y = self.snake_body[bod_num - 1].ycor()
+            self.snake_body[bod_num].goto(new_x, new_y)
+        self.snake_body[0].forward(MOVE_DISTANCE)
 
     def up(self):
         if self.head.heading() != DOWN:
