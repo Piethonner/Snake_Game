@@ -46,7 +46,7 @@ while game:
         snake.extend()
 
     # Collision with wall
-    if snake.head.xcor() > 430 or snake.head.xcor() < -450 or snake.head.ycor() > 430 or snake.head.ycor() < -450:
+    if snake.head.xcor() > 450 or snake.head.xcor() < -450 or snake.head.ycor() > 450 or snake.head.ycor() < -450:
         game = False
         scoreboard.game_over()
 
